@@ -1,0 +1,76 @@
+package cords {
+		
+	package compute {
+		
+		import services.computation.* 
+		import types.* 
+		      
+		environment dev {
+			server dev1 {
+				localhost
+				bundle calculator {
+					port 3000
+					service compute 1.0 as calculator
+					process calculateArea2
+				}     
+			}
+		} 
+	  	       
+		                 	  	            	  	  		 
+		process calculateArea2 version 1  {
+			     
+			service compute 1.0 as calculator
+			   
+			var input : DoubleOperand  
+			var output : DoubleResult  
+			var open values : DoubleOperand
+			var open values2 : DoubleOperand
+			var open values3 : DoubleOperand
+			var final rectArea : DoubleResult
+			var final ellipseArea : DoubleResult
+			var final shapeArea : DoubleResult
+		 	                    
+			sequence main {   
+				receive calculateShapeArea {
+					-> input
+				}
+				   
+					input -> values 
+					  
+					invoke calculateRectArea {
+						calculator.multiply(values) -> rectArea 
+					}
+				
+					rectArea -> values2 {
+						0.7853975 -> a  
+						res -> b  
+					}
+	
+					invoke calculateElipseArea {
+						calculator.multiply(values2) -> ellipseArea 
+					}
+					
+					rectArea -> values3 {
+						res -> a
+					}
+					
+					ellipseArea -> values3 {
+						res -> b
+					}
+					
+					invoke subractAreas {
+						calculator.subtract(values3) -> shapeArea 
+					}
+					
+					shapeArea -> output 
+				 				
+				reply calculateShapeArea {
+					return output 
+				}
+			} 
+			
+		}
+			 		
+	}
+	
+}

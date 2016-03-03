@@ -1,0 +1,54 @@
+------------ Server started ------------------
+[2016-03-03 15:48:12.298] [WARN] [default] - [SERVER] listening on port 3000
+[2016-03-03 15:48:35.979] [TRACE] [default] - [RECEIVE] request<pid:56d85cd3a78e24100da1c794> input:{"a":"5","b":"20"}
+[2016-03-03 15:48:35.980] [TRACE] [default] - [ASSIGN] start InputToValues
+[2016-03-03 15:48:35.987] [TRACE] [default] - [ASSIGN] values = {"a":"5","b":"20"}
+[2016-03-03 15:48:35.988] [TRACE] [default] - [INVOKE] CalculateRectArea
+[2016-03-03 15:48:35.990] [TRACE] [default] - [INVOKE] request : { "processid" : "56d85cd3a78e24100da1c794", "payload" : {"a":"5","b":"20"}}
+[2016-03-03 15:48:35.992] [TRACE] [default] - [ASSIGN] exit
+[2016-03-03 15:48:35.997] [TRACE] [default] - [INVOKE] request<pid:undefined> values:{"a":"5","b":"20"}
+[2016-03-03 15:48:36.000] [TRACE] [default] - found process instance:calculateArea2
+[2016-03-03 15:48:36.001] [TRACE] [default] - [INVOKE] multiplyRequest: {"processid":"56d85cd3a78e24100da1c794","payload":{"a":"5","b":"20"}}
+[2016-03-03 15:48:36.006] [TRACE] [default] - [SERVICE] response from /services/add:{"multiplyResponse":{"ouput": "100"}}
+[2016-03-03 15:48:36.010] [TRACE] [default] - [INVOKE] response code: 200
+[2016-03-03 15:48:36.013] [TRACE] [default] - [CONTEXT] updating context for process:calculateArea2 with{"multiplyResponse":{"ouput":"100"}}
+[2016-03-03 15:48:36.014] [TRACE] [default] - [INVOKE] response: "100"
+[2016-03-03 15:48:36.018] [TRACE] [default] - [INVOKE] result from invoking private endpoint: CalculateRectArea
+[2016-03-03 15:48:36.019] [TRACE] [default] - [INVOKE] returned { STATUS: 200, HEADERS: {"content-type":"text/html; charset=utf-8","content-length":"35","date":"Thu, 03 Mar 2016 15:48:36 GMT","connection":"close"}}
+[2016-03-03 15:48:36.021] [TRACE] [default] - [ASSIGN] start RectAreaToValues2
+[2016-03-03 15:48:36.037] [TRACE] [default] - [ASSIGN] values2 = {"b":"100","a":"0.7853975"}
+[2016-03-03 15:48:36.038] [TRACE] [default] - [INVOKE] CalculateElipseArea
+[2016-03-03 15:48:36.039] [TRACE] [default] - [INVOKE] request : { "processid" : "56d85cd3a78e24100da1c794", "payload" : {"b":"100","a":"0.7853975"}}
+[2016-03-03 15:48:36.040] [TRACE] [default] - [ASSIGN] exit
+[2016-03-03 15:48:36.042] [TRACE] [default] - [INVOKE] request<pid:undefined> values2:{"b":"100","a":"0.7853975"}
+[2016-03-03 15:48:36.045] [TRACE] [default] - found process instance:calculateArea2
+[2016-03-03 15:48:36.046] [TRACE] [default] - [INVOKE] multiplyRequest: {"processid":"56d85cd3a78e24100da1c794","payload":{"b":"100","a":"0.7853975"}}
+[2016-03-03 15:48:36.049] [TRACE] [default] - [SERVICE] response from /services/add:{"multiplyResponse":{"ouput": "78.53975"}}
+[2016-03-03 15:48:36.051] [TRACE] [default] - [INVOKE] response code: 200
+[2016-03-03 15:48:36.052] [TRACE] [default] - [CONTEXT] updating context for process:calculateArea2 with{"multiplyResponse":{"ouput":"78.53975"}}
+[2016-03-03 15:48:36.053] [TRACE] [default] - [INVOKE] response: "78.53975"
+[2016-03-03 15:48:36.064] [TRACE] [default] - [INVOKE] result from invoking private endpoint: CalculateElipseArea
+[2016-03-03 15:48:36.065] [TRACE] [default] - [INVOKE] returned { STATUS: 200, HEADERS: {"content-type":"text/html; charset=utf-8","content-length":"43","date":"Thu, 03 Mar 2016 15:48:36 GMT","connection":"close"}}
+[2016-03-03 15:48:36.069] [TRACE] [default] - [ASSIGN] start RectAreaToValues3
+[2016-03-03 15:48:36.073] [TRACE] [default] - [ASSIGN] values3 = {"a":"100"}
+[2016-03-03 15:48:36.073] [TRACE] [default] - [ASSIGN] start EllipseAreaToValues3
+[2016-03-03 15:48:36.077] [TRACE] [default] - [ASSIGN] exit
+[2016-03-03 15:48:36.079] [TRACE] [default] - [ASSIGN] values3 = {"a":"100","b":"78.53975"}
+[2016-03-03 15:48:36.080] [TRACE] [default] - [INVOKE] SubractAreas
+[2016-03-03 15:48:36.082] [TRACE] [default] - [INVOKE] request : { "processid" : "56d85cd3a78e24100da1c794", "payload" : {"a":"100","b":"78.53975"}}
+[2016-03-03 15:48:36.083] [TRACE] [default] - [ASSIGN] exit
+[2016-03-03 15:48:36.087] [TRACE] [default] - [INVOKE] request<pid:undefined> values3:{"a":"100","b":"78.53975"}
+[2016-03-03 15:48:36.089] [TRACE] [default] - found process instance:calculateArea2
+[2016-03-03 15:48:36.090] [TRACE] [default] - [INVOKE] subtractRequest: {"processid":"56d85cd3a78e24100da1c794","payload":{"a":"100","b":"78.53975"}}
+[2016-03-03 15:48:36.092] [TRACE] [default] - [SERVICE] response from /services/add:{"subtractResponse":{"ouput":"21.460250000000002"}}
+[2016-03-03 15:48:36.094] [TRACE] [default] - [INVOKE] response code: 200
+[2016-03-03 15:48:36.096] [TRACE] [default] - [CONTEXT] updating context for process:calculateArea2 with{"subtractResponse":{"ouput":"21.460250000000002"}}
+[2016-03-03 15:48:36.097] [TRACE] [default] - [INVOKE] response: "21.460250000000002"
+[2016-03-03 15:48:36.099] [TRACE] [default] - [INVOKE] result from invoking private endpoint: SubractAreas
+[2016-03-03 15:48:36.100] [TRACE] [default] - [INVOKE] returned { STATUS: 200, HEADERS: {"content-type":"text/html; charset=utf-8","content-length":"51","date":"Thu, 03 Mar 2016 15:48:36 GMT","connection":"close"}}
+[2016-03-03 15:48:36.101] [TRACE] [default] - [ASSIGN] start ShapeAreaToOutput
+[2016-03-03 15:48:36.103] [TRACE] [default] - [ASSIGN] output = {"res":"21.460250000000002"}
+[2016-03-03 15:48:36.105] [TRACE] [default] - [ASSIGN] exit
+[2016-03-03 15:48:36.108] [TRACE] [default] - [REPLY] ready to return: { "process": "calculateArea2", "reply" : { "output" : {"res":"21.460250000000002"}}}
+[2016-03-03 15:48:36.110] [TRACE] [default] - [CONTEXT] updating context for process:calculateArea2
+[2016-03-03 15:48:36.114] [TRACE] [default] - [REPLY] returning response: {"res":"21.460250000000002"}
