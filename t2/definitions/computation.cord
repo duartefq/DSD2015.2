@@ -1,0 +1,199 @@
+package services {
+	
+	package computation {
+		
+		import types.*
+		
+		entity IntOperand {
+			a : int 
+			b : int 
+		}
+		
+		entity IntResult {
+			res : int 
+		}
+
+		entity DoubleOperand {
+			a : double 
+			b : double 
+		}
+		
+		entity DoubleResult {
+			res : double 
+		}
+				  
+		message addRequest {
+			part input -> DoubleOperand
+		}
+
+		message addResponse {
+			part ouput -> DoubleResult
+		}
+
+		message subtractRequest {
+			part input -> DoubleOperand
+		}
+
+		message subtractResponse {
+			part ouput -> DoubleResult
+		}
+
+		message multiplyRequest {
+			part input -> DoubleOperand
+		}
+
+		message multiplyResponse {
+			part ouput -> DoubleResult
+		}
+
+		message divideRequest {
+			part input -> DoubleOperand
+		}
+
+		message divideResponse {
+			part ouput -> DoubleResult
+		}
+
+		message squareRequest {
+			part input -> DoubleOperand
+		}
+
+		message squareResponse {
+			part ouput -> DoubleResult
+		}
+		  	  
+		message fault {
+			part Fault -> Fault
+		}
+		
+		operation addResponse add (addRequest)
+			throws fault {
+				
+				GET
+				
+				'''    
+					var a = req.query.a ;
+				    var b = req.query.b ;
+				    var mult = parseFloat(a) + parseFloat(b);
+				    res.set( {"Content-Type" : "application/json;charset=UTF-8"} );
+				    var respMessage = \'{"addResponse":{"ouput":"\'+ mult.toString() + \'"}}\' ;
+				    logger.trace("[SERVICE] response from /services/add:"+respMessage);
+				    res.send(respMessage);
+				'''
+			}
+
+		operation subtractResponse subtract (subtractRequest)
+			throws fault {
+				
+				GET
+				
+				'''    
+					var a = req.query.a ;
+				    var b = req.query.b ;
+				    var mult = parseFloat(a) - parseFloat(b);
+				    res.set( {"Content-Type" : "application/json;charset=UTF-8"} );
+				    var respMessage = \'{"subtractResponse":{"ouput":"\'+ mult.toString() + \'"}}\' ;
+				    logger.trace("[SERVICE] response from /services/add:"+respMessage);
+				    res.send(respMessage);
+				'''
+				
+			}
+
+		operation multiplyResponse multiply (multiplyRequest)
+			throws fault {
+				
+				GET 
+				
+				'''    
+					var a = req.query.a ;
+				    var b = req.query.b ;
+				    var mult = parseFloat(a) * parseFloat(b);
+				    res.set( {"Content-Type" : "application/json;charset=UTF-8"} );
+				    var respMessage = \'{"multiplyResponse":{"ouput": "\'+ mult.toString() + \'"}}\' ;
+				    logger.trace("[SERVICE] response from /services/add:"+respMessage);
+				    res.send(respMessage);
+				'''	
+			}
+
+		operation divideResponse divide (divideRequest)
+			throws fault {
+			
+				GET
+			
+				'''    
+				    var a = req.query.a ;
+				    var b = req.query.b ;
+				    var mult = parseFloat(a) ;
+				    if (parseFloat(b) !== 0) mult = parseFloat(a) / parseFloat(b);
+				    res.set( {"Content-Type" : "application/json;charset=UTF-8"} );
+				    var respMessage = \'{"divideResponse":{"ouput":"\'+ mult.toString() + \'"}}\' ;
+				    logger.trace("[SERVICE] response from /services/divide:"+respMessage);
+				    res.send(respMessage);
+				'''	
+			}
+			
+
+		operation squareResponse square (squareRequest)
+			throws fault {
+				
+				GET
+				
+				'''    
+				    var a = req.query.a ;
+				    var mult = parseFloat(a)*parseFloat(a);
+				    res.set( {"Content-Type" : "application/json;charset=UTF-8"} );
+				    var respMessage = \'{"squareResponse":{"ouput":"\'+ mult.toString() + \'"}}\' ;
+				    logger.trace("[SERVICE] response from /services/square:"+respMessage);
+				    res.send(respMessage);
+				'''	
+			} 
+		
+		binding SOAP11Binding HTTP {
+			
+			operation add {
+				//the SOAPAction is inferred automatically
+				//otherwise it can be specified as action 'validateAddress'
+				request input 
+				response Response
+				throws fault 
+			} 
+			 
+			operation subtract {
+				request input 
+				response Response
+				throws fault
+			}
+
+			operation multiply {
+				request input 
+				response Response
+				throws fault1
+			}
+
+			operation divide {
+				request input 
+				response Response
+				throws fault
+			}
+
+
+		}
+		
+		service compute {
+			version 1.0 {
+				interface computeInterface {
+					add
+					subtract
+					multiply
+					divide
+					square
+				}
+					
+				port SOAP11 {
+					binding SOAP11Binding
+					address '/common/address/'
+				}
+			}
+		}
+	}
+}
