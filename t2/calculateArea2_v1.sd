@@ -1,0 +1,11 @@
+#![calculateArea2]	
+
+client:client[a]
+process:process[a,x]
+calculator:compute
+
+client:output=process.calculateShapeArea(input)
+process:rectArea=calculator.multiply(values)
+process:ellipseArea=calculator.multiply(values2)
+process:shapeArea=calculator.subtract(values3)
+client:stop

@@ -1,0 +1,125 @@
+<bpel:process name="calculateArea2"
+
+         targetNamespace="http://compute.dev.calculateArea2_v1"
+         suppressJoinFailure="yes"
+         xmlns:tns="http://compute.dev.calculateArea2_v1"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+ 
+
+    <!-- Import the client WSDL -->
+	<bpel:import location="calculateArea2Artifacts.wsdl" namespace="http://compute.dev.calculateArea2_v1" importType="http://schemas.xmlsoap.org/wsdl/" /> 
+<bpel:import namespace="http://calculator.bpel.tps" location="SimpleComputation.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+          
+    <!-- ================================================================= -->         
+    <!-- PARTNERLINKS                                                      -->
+    <!-- List of services participating in this BPEL process               -->
+    <!-- ================================================================= -->         
+    <bpel:partnerLinks> 
+        <!-- The 'client' role represents the requester of this service. -->
+        <bpel:partnerLink name="client"
+                     partnerLinkType="tns:calculateArea2"
+                     myRole="calculateArea2Provider"
+                     /> 
+<bpel:partnerLink name="computePL" partnerLinkType="tns:computePLT" partnerRole="computePLRole"/>
+     </bpel:partnerLinks>
+
+    <!-- ================================================================= -->         
+    <!-- VARIABLES                                                         -->
+    <!-- List of messages and XML documents used within this BPEL process  -->
+    <!-- ================================================================= -->         
+    <bpel:variables>
+ <bpel:variable name="input" messageType="tns:DoubleOperand"/>
+ <bpel:variable name="output" messageType="tns:DoubleResult"/>
+ <bpel:variable name="values" messageType="tns:DoubleOperand"/>
+ <bpel:variable name="values2" messageType="tns:DoubleOperand"/>
+ <bpel:variable name="values3" messageType="tns:DoubleOperand"/>
+ <bpel:variable name="rectArea" messageType="tns:DoubleResult"/>
+ <bpel:variable name="ellipseArea" messageType="tns:DoubleResult"/>
+ <bpel:variable name="shapeArea" messageType="tns:DoubleResult"/>
+    </bpel:variables>
+
+    <!-- ================================================================= -->         
+    <!-- ORCHESTRATION LOGIC                                               -->
+    <!-- Set of activities coordinating the flow of messages across the    -->
+    <!-- services integrated within this business process                  -->
+    <!-- ================================================================= -->         
+
+<bpel:receive name="calculateShapeArea" partnerLink="client"
+	portType="tns:calculateArea2"
+	operation="calculateShapeArea" variable="input"
+	createInstance="yes"/>
+	
+<bpel:assign validate="no" name="AssigninputTovalues">
+</bpel:assign>
+<bpel:invoke name="calculateRectArea" 
+	partnerLink="tns:compute" 
+	operation="multiply" 
+	portType="compute" 
+	inputVariable="values" 
+	outputVariable="rectArea">
+</bpel:invoke>
+
+<bpel:assign validate="no" name="AssignrectAreaTovalues2">
+	<bpel:copy>
+		<bpel:from>
+			<bpel:literal xml:space="preserve">0.7853975</bpel:literal>
+		</bpel:from>
+		<bpel:to variable="DividePLRequest1" part="parameters">
+			<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[com.chorusjs.ol.cord.impl.FeatureImpl@7136f8d7 (isIdentity: false, name: a, multiplicity: =, description: null, default: null)]]></bpel:query>
+		</bpel:to>
+	</bpel:copy>
+	<bpel:copy>
+		<bpel:from variable="res" part="parameters">
+			<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[res]]></bpel:query>
+		</bpel:from>
+		<bpel:to variable="b" part="payload">
+			<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[b]]></bpel:query>
+		</bpel:to>
+	</bpel:copy>
+</bpel:assign>
+<bpel:invoke name="calculateElipseArea" 
+	partnerLink="tns:compute" 
+	operation="multiply" 
+	portType="compute" 
+	inputVariable="values2" 
+	outputVariable="ellipseArea">
+</bpel:invoke>
+
+<bpel:assign validate="no" name="AssignrectAreaTovalues3">
+	<bpel:copy>
+		<bpel:from variable="res" part="parameters">
+			<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[res]]></bpel:query>
+		</bpel:from>
+		<bpel:to variable="a" part="payload">
+			<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[a]]></bpel:query>
+		</bpel:to>
+	</bpel:copy>
+</bpel:assign>
+<bpel:assign validate="no" name="AssignellipseAreaTovalues3">
+	<bpel:copy>
+		<bpel:from variable="res" part="parameters">
+			<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[res]]></bpel:query>
+		</bpel:from>
+		<bpel:to variable="b" part="payload">
+			<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[b]]></bpel:query>
+		</bpel:to>
+	</bpel:copy>
+</bpel:assign>
+<bpel:invoke name="subractAreas" 
+	partnerLink="tns:compute" 
+	operation="subtract" 
+	portType="compute" 
+	inputVariable="values3" 
+	outputVariable="shapeArea">
+</bpel:invoke>
+
+<bpel:assign validate="no" name="AssignshapeAreaTooutput">
+</bpel:assign>
+<bpel:reply name="'calculateShapeAreaReply'" 
+	partnerLink="client"
+	tns:calculateArea2"
+	operation="calculateShapeArea" 
+	variable="output"
+/>
+
+</bpel:sequence></bpel:process>
