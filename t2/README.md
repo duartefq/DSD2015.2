@@ -16,7 +16,7 @@ As definições do processo exemplo podem ser vistos na pasta **definitions**.
 
 **A definição do processo (cord) pode ser vista aqui:** [calculateArea cord definition](definitions/calculateArea2.cord)
 
-**A definição do serviço computation (cauladora) pode ser vista aqui:** [computation definition](definitions/computation.cord)
+**A definição do serviço computation (calculadora) pode ser vista aqui:** [computation definition](definitions/computation.cord)
 
 **Outline:**
 
