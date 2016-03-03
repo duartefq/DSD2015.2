@@ -2,7 +2,7 @@
 
 Engine utilizada: [Chorusjs](http://chorusjs.com)
 
-## What is Chorus.js?
+## O que é Chorus.js?
 
 A engine Chorus.js oferece uma maneira muito simples para orquestrar APIs síncronas e assíncronas em aplicações Node.
 
